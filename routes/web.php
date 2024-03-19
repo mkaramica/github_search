@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function (Request $request) {
-    debug_log('Testing debug-logger...');
     $githubAccount = $request->input('github_account');
+    debug_log('Received GitHub Account: "' . $githubAccount . '"');
     return view('welcome', ['githubAccount' => $githubAccount . $githubAccount]);    
 });

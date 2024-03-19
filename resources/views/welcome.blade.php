@@ -62,13 +62,7 @@
 
             // Sending HTTP request to the backend
             var httpRequest = new XMLHttpRequest();
-            httpRequest.open('GET', url, true);
-            
-            httpRequest.onreadystatechange = function() {
-                if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
-                    alert("Request sent to the backend: " + url); // Alert the request sent to the backend
-                }
-            };
+            httpRequest.open('GET', url, true);            
             httpRequest.send();
         });
     </script>
