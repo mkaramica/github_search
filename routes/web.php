@@ -23,6 +23,6 @@ Route::get('/', function (Request $request) {
     }
 
     debug_log('GitHub Account: "' . $githubAccount . '"');
-    return view('welcome', ['githubAccount' => $githubAccount . "-" . $githubAccount]);    
+    return "<h3>Given GitHub Account: " . $githubAccount . "</h3>" ;
 
 });
