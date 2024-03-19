@@ -25,8 +25,11 @@ class GitHubController extends Controller
             ])->render();
         } 
 
+        $userAvatarUrl = $this->userInfo['avatar_url'];
+
         return view('components.user-info', [
-                'githubAccount' => $this->githubAccount
+                'githubAccount' => $this->githubAccount,
+                'userAvatarUrl' => $userAvatarUrl
             ])->render();
         
     }
