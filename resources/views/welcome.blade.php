@@ -43,8 +43,8 @@
     <div class="container">
         <h1>Search for a GitHub Account</h1>
         <form id="searchForm" action="" method="GET"> 
-            <label for="results_per_page">Results Per Page:</label>
-            <input type="number" id="results_per_page" name="results_per_page" value="10" min="1">
+            <label for="per_page">Results Per Page:</label>
+            <input type="number" id="per_page" name="per_page" value="10" min="1">
             </br></br>
             <label for="github_account">GitHub Account:</label>
             <input type="text" id="github_account" name="github_account" placeholder="Enter GitHub Account">
@@ -58,14 +58,14 @@
             event.preventDefault(); // Prevents the default form submission behavior
 
             var githubAccount = document.getElementById('github_account').value;
-            var resultsPerPageInput = document.getElementById('results_per_page');
-            var resultsPerPage = resultsPerPageInput ? resultsPerPageInput.value : 10;
+            var perPageInput = document.getElementById('per_page');
+            var perPage = perPageInput ? perPageInput.value : 10;
 
             // Check if githubAccount is not empty
             if (githubAccount.trim() === '') {
                 return; // Do nothing if the githubAccount is empty
             }
-            var url = '?github_account=' + encodeURIComponent(githubAccount) + '&results_per_page=' + resultsPerPage;
+            var url = '?github_account=' + encodeURIComponent(githubAccount) + '&per_page=' + perPage;
             
             // Sending AJAX request to the backend
             var httpRequest = new XMLHttpRequest();
