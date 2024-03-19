@@ -47,6 +47,9 @@
             <input type="text" id="github_account" name="github_account" placeholder="Enter GitHub Account">
             <input type="submit" value="Search" id="searchButton">
         </form>
+        @if(isset($githubAccount))
+            <p>Received GitHub Account: {{ $githubAccount }}</p>
+        @endif
     </div>
 
     <script>
@@ -54,15 +57,16 @@
             event.preventDefault(); // Prevents the default form submission behavior
 
             var githubAccount = document.getElementById('github_account').value;
+            
+            var url = '/?github_account=' + encodeURIComponent(githubAccount);
 
             // Sending HTTP request to the backend
-            // Here you should replace 'backend_url' with the actual URL of your backend endpoint
-            var backendUrl = ''; // Change 'backend_url' to your actual backend URL
             var httpRequest = new XMLHttpRequest();
-            httpRequest.open('GET', backendUrl + '?github_account=' + githubAccount, true);
+            httpRequest.open('GET', url, true);
+            
             httpRequest.onreadystatechange = function() {
                 if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
-                    alert("Response from backend: " + httpRequest.responseText); // Alert the response from the backend
+                    alert("Request sent to the backend: " + url); // Alert the request sent to the backend
                 }
             };
             httpRequest.send();

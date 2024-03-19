@@ -16,9 +16,5 @@ use Illuminate\Http\Request;
 
 Route::get('/', function (Request $request) {
     $githubAccount = $request->input('github_account');
-	if ($githubAccount) {
-		return "Received GitHub Account: $githubAccount";
-	}
-		
-	return view('welcome');
+    return view('welcome', ['githubAccount' => $githubAccount . $githubAccount]);    
 });
