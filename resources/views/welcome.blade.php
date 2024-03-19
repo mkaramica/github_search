@@ -58,13 +58,15 @@
             event.preventDefault(); // Prevents the default form submission behavior
 
             var githubAccount = document.getElementById('github_account').value;
+            var resultsPerPageInput = document.getElementById('results_per_page');
+            var resultsPerPage = resultsPerPageInput ? resultsPerPageInput.value : 10;
 
             // Check if githubAccount is not empty
             if (githubAccount.trim() === '') {
                 return; // Do nothing if the githubAccount is empty
             }
-            var url = '?github_account=' + encodeURIComponent(githubAccount);
-
+            var url = '?github_account=' + encodeURIComponent(githubAccount) + '&results_per_page=' + resultsPerPage;
+            
             // Sending AJAX request to the backend
             var httpRequest = new XMLHttpRequest();
             httpRequest.open('GET', url, true);

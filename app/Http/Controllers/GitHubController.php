@@ -17,7 +17,7 @@ class GitHubController extends Controller
         $this->userInfo = GitHubService::fetchUserInfo($this->githubAccount);
     }
 
-    public function returnResponseComponent()
+    public function returnResponseComponent($resultsPerPage = 10)
     {
         if (!$this->userInfo) {
             return view('components.account-not-found', [

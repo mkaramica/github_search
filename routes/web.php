@@ -17,6 +17,7 @@ use App\Http\Controllers\GitHubController;
 
 Route::get('/', function (Request $request) {
     $githubAccount = $request->input('github_account');
+    $resultsPerPage = $request->input('results_per_page');
 
     if (!isset($githubAccount) || empty($githubAccount) ) {
         debug_log('No or empty parameter!');
@@ -25,6 +26,6 @@ Route::get('/', function (Request $request) {
 
     debug_log('GitHub Account: "' . $githubAccount . '"');
     $gitHubController = new GitHubController($githubAccount);
-    $response = $gitHubController->returnResponseComponent();
+    $response = $gitHubController->returnResponseComponent($resultsPerPage);
     return $response;
 });
