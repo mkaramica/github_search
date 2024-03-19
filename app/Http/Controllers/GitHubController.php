@@ -28,10 +28,14 @@ class GitHubController extends Controller
         $userAvatarUrl = $this->userInfo['avatar_url'];
         $nFollowers = $this->userInfo['followers'];
 
+       $followersAvatars = GitHubService::fetchFollowersAvatars($this->githubAccount);
+//        $followersAvatars = ["https://avatars.githubusercontent.com/u/9387472?v=4"];
+
         return view('components.user-info', [
                 'githubAccount' => $this->githubAccount,
                 'userAvatarUrl' => $userAvatarUrl,
-                'nFollowers' => $nFollowers
+                'nFollowers' => $nFollowers,
+                'followersAvatars' => $followersAvatars
             ])->render();
         
     }

@@ -23,8 +23,12 @@ Route::get('/', function (Request $request) {
         debug_log('No or empty parameter!');
         return view('welcome');
     }
+    $arr=['1','2'];
+    foreach ($arr as $element) {
+        debug_log('loop...' . $element);
+    }
 
-    debug_log('GitHub Account: "' . $githubAccount . '"');
+    //debug_log('GitHub Account: "' . $githubAccount . '"');
     $gitHubController = new GitHubController($githubAccount);
     $response = $gitHubController->returnResponseComponent($resultsPerPage);
     return $response;
