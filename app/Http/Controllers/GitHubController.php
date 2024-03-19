@@ -8,10 +8,13 @@ use App\Services\GitHubService;
 
 class GitHubController extends Controller
 {
-    protected $baseUrl = 'https://api.github.com';
-
-    public function checkUserExists($username)
+    public function __construct($githubAccount)
     {
-        return $response = GitHubService::userExists($username);        
+        $this->githubAccount = $githubAccount;
+    }
+    public function checkUserExists()
+    {
+        return GitHubService::userExists($this->githubAccount);
     }
 }
+
