@@ -42,12 +42,32 @@
 <body>
     <div class="container">
         <h1>Search for a GitHub Account</h1>
-        <form action="" method="GET">
+        <form id="searchForm" action="" method="GET"> 
             <label for="github_account">GitHub Account:</label>
             <input type="text" id="github_account" name="github_account" placeholder="Enter GitHub Account">
-            <input type="submit" value="Search">
+            <input type="submit" value="Search" id="searchButton">
         </form>
     </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevents the default form submission behavior
+
+            var githubAccount = document.getElementById('github_account').value;
+
+            // Sending HTTP request to the backend
+            // Here you should replace 'backend_url' with the actual URL of your backend endpoint
+            var backendUrl = ''; // Change 'backend_url' to your actual backend URL
+            var httpRequest = new XMLHttpRequest();
+            httpRequest.open('GET', backendUrl + '?github_account=' + githubAccount, true);
+            httpRequest.onreadystatechange = function() {
+                if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
+                    alert("Response from backend: " + httpRequest.responseText); // Alert the response from the backend
+                }
+            };
+            httpRequest.send();
+        });
+    </script>
 </body>
 </html>
 

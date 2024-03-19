@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function (Request $request) {
+    $githubAccount = $request->input('github_account');
+	if ($githubAccount) {
+		return "Received GitHub Account: $githubAccount";
+	}
+		
+	return view('welcome');
 });
