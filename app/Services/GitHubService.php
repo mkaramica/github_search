@@ -13,4 +13,15 @@ class GitHubService
         $response = Http::get(self::$apiUrl . "/users/$username");
         return $response->successful();
     }
+    
+    public static function fetchUserInfo($username)
+    {
+        $response = Http::get(self::$apiUrl . "/users/$username");
+        if (!$response->successful()) {
+            return null;
+        }
+        
+        return $response->json();
+    }
+
 }

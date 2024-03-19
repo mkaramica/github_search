@@ -18,7 +18,7 @@ class GitHubController extends Controller
     }
     private function checkUserExists()
     {
-        return GitHubService::userExists($this->githubAccount);
+        return GitHubService::fetchUserInfo($this->githubAccount);
     }
     public function isExist()
     {
