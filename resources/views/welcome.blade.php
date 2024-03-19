@@ -47,25 +47,52 @@
             <input type="text" id="github_account" name="github_account" placeholder="Enter GitHub Account">
             <input type="submit" value="Search" id="searchButton">
         </form>
-        @if(isset($githubAccount))
+        @if(isset($githubAccount) && !empty($githubAccount))  
             <p>Received GitHub Account: {{ $githubAccount }}</p>
         @endif
     </div>
-
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevents the default form submission behavior
 
             var githubAccount = document.getElementById('github_account').value;
-            
-            var url = '/?github_account=' + encodeURIComponent(githubAccount);
+
+            var url = '?github_account=' + encodeURIComponent(githubAccount);
 
             // Sending HTTP request to the backend
             var httpRequest = new XMLHttpRequest();
-            httpRequest.open('GET', url, true);            
+            httpRequest.open('GET', url, true); 
+
+            httpRequest.onload = function() {
+                if (httpRequest.status >= 200 && httpRequest.status < 300) {
+                    // Request was successful
+                    alert("HTTP request sent successfully!");
+                    console.log(httpRequest);
+                    window.location.reload();
+                } else {
+                    // Request failed
+                    alert('HTTP request failed with status ' + httpRequest.status);
+                }
+            };
+
+            httpRequest.onerror = function() {
+                // An error occurred during the request
+                alert('HTTP request failed');
+            };
+
             httpRequest.send();
         });
+
+       function updatePage(response) {
+            // Update the DOM with the response content
+            // For example, update a paragraph element with id="result"
+            var resultElement = document.getElementById('result');
+            resultElement.textContent = 'Received GitHub Account: ' + response.githubAccount;
+        }
+
     </script>
+
+
 </body>
 </html>
 

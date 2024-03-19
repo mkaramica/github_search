@@ -16,6 +16,13 @@ use Illuminate\Http\Request;
 
 Route::get('/', function (Request $request) {
     $githubAccount = $request->input('github_account');
-    debug_log('Received GitHub Account: "' . $githubAccount . '"');
-    return view('welcome', ['githubAccount' => $githubAccount . $githubAccount]);    
+
+    if (!isset($githubAccount) || empty($githubAccount) ) {
+        debug_log('No or empty parameter!');
+        return view('welcome');
+    }
+
+    debug_log('GitHub Account: "' . $githubAccount . '"');
+    return view('welcome', ['githubAccount' => $githubAccount . "-" . $githubAccount]);    
+
 });
