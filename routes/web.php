@@ -25,7 +25,6 @@ Route::get('/', function (Request $request) {
 
     debug_log('GitHub Account: "' . $githubAccount . '"');
     $gitHubController = new GitHubController($githubAccount);
-    $isAccountExist = $gitHubController->isExist();
     $response = $gitHubController->returnResponseComponent();
     return $response;
 });

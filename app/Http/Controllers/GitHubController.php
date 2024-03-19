@@ -9,24 +9,23 @@ use App\Services\GitHubService;
 class GitHubController extends Controller
 {
     protected $githubAccount;
-    protected $isExist;
+    protected $userInfo;
     
     function __construct($githubAccount)
     {
         $this->githubAccount = $githubAccount;
-        $this->isExist = $this->checkUserExists();
+        $this->userInfo = $this->checkUserExists();
     }
+
     private function checkUserExists()
     {
         return GitHubService::fetchUserInfo($this->githubAccount);
     }
-    public function isExist()
-    {
-        return $this->isExist;
-    }
+
+
     public function returnResponseComponent()
     {
-        if (!$this->isExist) {
+        if (!$this->userInfo) {
             return view('components.account-not-found', [
                 'githubAccount' => $this->githubAccount
             ])->render();
