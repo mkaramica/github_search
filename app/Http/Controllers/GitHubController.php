@@ -14,14 +14,8 @@ class GitHubController extends Controller
     function __construct($githubAccount)
     {
         $this->githubAccount = $githubAccount;
-        $this->userInfo = $this->checkUserExists();
+        $this->userInfo = GitHubService::fetchUserInfo($this->githubAccount);
     }
-
-    private function checkUserExists()
-    {
-        return GitHubService::fetchUserInfo($this->githubAccount);
-    }
-
 
     public function returnResponseComponent()
     {
