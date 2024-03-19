@@ -57,6 +57,11 @@ return [
             'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
+        'debug_log' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/debug.log'),
+            'level' => 'debug',
+        ], 
 
         'single' => [
             'driver' => 'single',
