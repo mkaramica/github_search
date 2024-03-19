@@ -8,13 +8,29 @@ use App\Services\GitHubService;
 
 class GitHubController extends Controller
 {
-    public function __construct($githubAccount)
+    protected $githubAccount;
+    protected $isExist;
+    
+    function __construct($githubAccount)
     {
         $this->githubAccount = $githubAccount;
+        $this->isExist = $this->checkUserExists();
     }
-    public function checkUserExists()
+    private function checkUserExists()
     {
         return GitHubService::userExists($this->githubAccount);
     }
-}
+    public function isExist()
+    {
+        return $this->isExist;
+    }
+    public function returnResponseComponent()
+    {
+        if ($this->isExist) {
+            return "<h3>yes</h3>";
+        } else {
+            return "<h3>no</h3>";
+        }
+    }
 
+}
