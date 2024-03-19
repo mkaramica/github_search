@@ -26,11 +26,16 @@ class GitHubController extends Controller
     }
     public function returnResponseComponent()
     {
-        if ($this->isExist) {
-            return "<h3>yes</h3>";
-        } else {
-            return "<h3>no</h3>";
-        }
+        if (!$this->isExist) {
+            return view('components.account-not-found', [
+                'githubAccount' => $this->githubAccount
+            ])->render();
+        } 
+
+        return view('components.user-info', [
+                'githubAccount' => $this->githubAccount
+            ])->render();
+        
     }
 
 }
