@@ -9,8 +9,8 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
+            margin: 10;
+            padding: 10;
             display: flex;
             justify-content: left;
             align-items: left;
@@ -43,6 +43,9 @@
     <div class="container">
         <h1>Search for a GitHub Account</h1>
         <form id="searchForm" action="" method="GET"> 
+            <label for="results_per_page">Results Per Page:</label>
+            <input type="number" id="results_per_page" name="results_per_page" value="10" min="1">
+            </br></br>
             <label for="github_account">GitHub Account:</label>
             <input type="text" id="github_account" name="github_account" placeholder="Enter GitHub Account">
             <input type="submit" value="Search" id="searchButton">
