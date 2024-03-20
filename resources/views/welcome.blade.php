@@ -91,7 +91,40 @@
 
             httpRequest.send();
         });
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(event) {
+                var nextButton = event.target.closest('#nextButton');
+                if (nextButton) {
+                    alert('Next Button Clicked!');
+                    var url = "?github_account=taylorotwell&per_page=10&page=2";
+                    var httpRequest = new XMLHttpRequest();
+                    httpRequest.open('GET', url, true); 
+                    
+                    httpRequest.onload = function() {
+                    if (httpRequest.status >= 200 && httpRequest.status < 300) {
+                        // Request was successful
+                        var response = httpRequest.responseText; // Assuming response is HTML code
+                        document.getElementById('result').innerHTML = response; // Update the DOM with the response
+
+                    } else {
+                        // Request failed
+                        alert('HTTP request failed with status ' + httpRequest.status);
+                    }
+                };
+
+                httpRequest.onerror = function() {
+                    // An error occurred during the request
+                    alert('HTTP request failed');
+                };
+
+                httpRequest.send();
+                }
+            });
+        });
     </script>
 </body>
 </html>
+
+
+
 
