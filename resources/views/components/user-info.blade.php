@@ -9,7 +9,7 @@
     <br>
     @if (!empty($followersAvatars))
         <div class="follower-images">
-            <h3>Followers (#{{ $indx_from  }} to #{{ $indx_to }})</h3>
+            <h3>Followers (Page {{ $page  }}: #{{ $indx_from  }} to #{{ $indx_to }})</h3>
 
             @if ($indx_from > 1)
                 <button id="prevButton" style="font-size: 16px; padding: 8px 12px; width: 100px;">Previous</button>
