@@ -95,8 +95,15 @@
             document.addEventListener('click', function(event) {
                 var nextButton = event.target.closest('#nextButton');
                 if (nextButton) {
-                    alert('Next Button Clicked!');
-                    var url = "?github_account=taylorotwell&per_page=10&page=2";
+                    const dataContainer = document.getElementById('dataContainer');
+                    const githubAccount = dataContainer.getAttribute('data-github-account');
+                    const perPage = dataContainer.getAttribute('data-per-page');
+                    let currentPage = dataContainer.getAttribute('data-page');
+                    currentPage++;
+                    
+                    //var url = "?github_account=taylorotwell&per_page=10&page=2";
+                    var url = '?github_account=' + encodeURIComponent(githubAccount) + '&per_page=' + perPage + '&page=' + currentPage;
+                    alert(url)
                     var httpRequest = new XMLHttpRequest();
                     httpRequest.open('GET', url, true); 
                     
@@ -124,7 +131,4 @@
     </script>
 </body>
 </html>
-
-
-
 
