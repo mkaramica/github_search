@@ -17,7 +17,7 @@ class GitHubController extends Controller
         $this->userInfo = GitHubService::fetchUserInfo($this->githubAccount);
     }
 
-    public function returnResponseComponent($perPage = 10)
+    public function returnResponseComponent(int $page=1, int $perPage=10)
     {
         if (!$this->userInfo) {
             return view('components.account-not-found', [
@@ -28,12 +28,23 @@ class GitHubController extends Controller
         $userAvatarUrl = $this->userInfo['avatar_url'];
         $nFollowers = $this->userInfo['followers'];
 
-       $followersAvatars = GitHubService::fetchFollowersAvatars($this->githubAccount);
+       $followersAvatars = GitHubService::fetchFollowersAvatars(
+           username: $this->githubAccount, 
+           page: $page, 
+           perPage: $perPage
+       );
+
+       $indx_from = ($page - 1) * $perPage + 1;
+       $indx_to = min($nFollowers, $page * $perPage);
 
         return view('components.user-info', [
                 'githubAccount' => $this->githubAccount,
                 'userAvatarUrl' => $userAvatarUrl,
                 'nFollowers' => $nFollowers,
+                'page' => $page,
+                'perPage' => $perPage,
+                'indx_from' => $indx_from,
+                'indx_to' => $indx_to,
                 'followersAvatars' => $followersAvatars
             ])->render();
         

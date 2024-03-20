@@ -66,6 +66,7 @@
                 return; // Do nothing if the githubAccount is empty
             }
             var url = '?github_account=' + encodeURIComponent(githubAccount) + '&per_page=' + perPage;
+            console.log(url);
             
             // Sending AJAX request to the backend
             var httpRequest = new XMLHttpRequest();

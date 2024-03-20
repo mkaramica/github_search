@@ -4,7 +4,7 @@
 <br>
 @if (!empty($followersAvatars))
     <div class="follower-images">
-        <h3>Followers</h3>
+        <h3>Followers (#{{ $indx_from  }} to #{{ $indx_to }})</h3>
         @foreach ($followersAvatars as $avatarUrl)
             <img src="{{ $avatarUrl }}" alt="Follower Avatar" style="width: 100px; height: auto;">
         @endforeach

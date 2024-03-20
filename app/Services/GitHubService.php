@@ -18,10 +18,11 @@ class GitHubService
         return $response->json();
     }
     
-    public static function fetchFollowersAvatars($username)
+    public static function fetchFollowersAvatars($username, $page=1, $perPage=10)
     {
-        debug_log('start fetching followers ...');
-        $response = Http::get(self::$apiUrl . "/users/$username/followers");
+        $url = self::$apiUrl . "/users/$username/followers?page=" .$page . "&per_page=" . $perPage;
+        debug_log($url);
+        $response = Http::get($url);
         debug_log('response:' . $response->successful() );
 
         if (!$response->successful()) {

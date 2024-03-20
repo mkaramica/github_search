@@ -17,14 +17,22 @@ use App\Http\Controllers\GitHubController;
 
 Route::get('/', function (Request $request) {
     $githubAccount = $request->input('github_account');
-    $perPage = $request->input('per_page');
-
-    if (!isset($githubAccount) || empty($githubAccount) ) {
-        debug_log('No or empty parameter!');
+     if (!isset($githubAccount) || empty($githubAccount) ) {
         return view('welcome');
+    }    
+
+    $perPage = $request->input('per_page');
+    $page = $request->input('page');
+    
+    if (!isset($perPage) || empty($perPage) ) {
+        $perPage = 10;
     }
 
+    if (!isset($page) || empty($page) ) {
+        $page = 1;
+    }
+    
     $gitHubController = new GitHubController($githubAccount);
-    $response = $gitHubController->returnResponseComponent($perPage);
+    $response = $gitHubController->returnResponseComponent(page: $page, perPage: $perPage);
     return $response;
 });
