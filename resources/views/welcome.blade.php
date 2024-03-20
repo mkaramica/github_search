@@ -32,69 +32,34 @@
             if (githubAccount.trim() === '') {
                 return; // Do nothing if the githubAccount is empty
             }
-            var url = '?github_account=' + encodeURIComponent(githubAccount) + '&per_page=' + perPage;
-            console.log(url);
-            
-            // Sending AJAX request to the backend
-            var httpRequest = new XMLHttpRequest();
-            httpRequest.open('GET', url, true);
-
-            httpRequest.onload = function() {
-                if (httpRequest.status >= 200 && httpRequest.status < 300) {
-                    // Request was successful
-                    var response = httpRequest.responseText; // Assuming response is HTML code
-                    document.getElementById('result').innerHTML = response; // Update the DOM with the response
-
-                } else {
-                    // Request failed
-                    alert('HTTP request failed with status ' + httpRequest.status);
-                }
-            };
-
-            httpRequest.onerror = function() {
-                // An error occurred during the request
-                alert('HTTP request failed');
-            };
-
-            httpRequest.send();
+            let url = buildURL(githubAccount, perPage);
+            sendRequest(url);
         });
         document.addEventListener('DOMContentLoaded', function() {
             document.addEventListener('click', function(event) {
                 var nextButton = event.target.closest('#nextButton');
-                if (nextButton) {
+                var prevButton = event.target.closest('#prevButton');
+                
+                if (nextButton || prevButton) {
                     const dataContainer = document.getElementById('dataContainer');
                     const githubAccount = dataContainer.getAttribute('data-github-account');
                     const perPage = dataContainer.getAttribute('data-per-page');
-                    let currentPage = dataContainer.getAttribute('data-page');
-                    currentPage++;
+                    const currentPage = parseInt(dataContainer.getAttribute('data-page'));
+                    let targetPage = currentPage;
                     
-                    //var url = "?github_account=taylorotwell&per_page=10&page=2";
-                    var url = '?github_account=' + encodeURIComponent(githubAccount) + '&per_page=' + perPage + '&page=' + currentPage;
-                    var httpRequest = new XMLHttpRequest();
-                    httpRequest.open('GET', url, true); 
-                    
-                    httpRequest.onload = function() {
-                    if (httpRequest.status >= 200 && httpRequest.status < 300) {
-                        // Request was successful
-                        var response = httpRequest.responseText; // Assuming response is HTML code
-                        document.getElementById('result').innerHTML = response; // Update the DOM with the response
-
-                    } else {
-                        // Request failed
-                        alert('HTTP request failed with status ' + httpRequest.status);
+                    if (nextButton) {
+                        targetPage += 1; // Increment for next page
+                    } else if (prevButton) {
+                        targetPage -= 1; // Decrement for previous page
                     }
-                };
 
-                httpRequest.onerror = function() {
-                    // An error occurred during the request
-                    alert('HTTP request failed');
-                };
-
-                httpRequest.send();
+                    let url = buildURL(githubAccount, perPage, targetPage);
+                    sendRequest(url);
                 }
             });
         });
     </script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
 
